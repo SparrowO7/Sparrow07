@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>SPARROW_07 | A Cinematic Journey</title>
+  <meta name="description" content="An interactive scroll-controlled cinematic short film. The show must go on.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- LOADING -->
+  <div id="loading-screen">
+    <div class="loader-content">
+      <div class="sparrow-icon">
+        <svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="55" cy="55" rx="28" ry="18" fill="currentColor" opacity="0.9"/>
+          <circle cx="82" cy="42" r="12" fill="currentColor" opacity="0.9"/>
+          <polygon points="94,40 108,42 94,44" fill="currentColor" opacity="0.8"/>
+          <circle cx="86" cy="40" r="2.5" fill="#0a0a0a"/>
+          <path d="M45 48 Q30 25 15 30 Q25 42 40 52 Z" fill="currentColor" opacity="0.7"/>
+          <path d="M28 52 Q8 45 5 55 Q15 55 28 58 Z" fill="currentColor" opacity="0.7"/>
+        </svg>
+      </div>
+      <p class="loader-title">SPARROW_07</p>
+      <div class="loader-bar-track"><div class="loader-bar-fill" id="loader-bar"></div></div>
+      <p class="loader-pct" id="loader-pct">0%</p>
+    </div>
+  </div>
+
+  <!-- ENTER -->
+  <div id="enter-screen" class="hidden">
+    <div class="enter-content">
+      <h1 class="enter-title">SPARROW_07</h1>
+      <p class="enter-subtitle">A journey. Not a resume.</p>
+      <button class="enter-btn" id="enter-btn">Enter the Journey</button>
+      <p class="enter-hint">Best experienced fullscreen &bull; Scroll to control</p>
+    </div>
+  </div>
+
+  <!-- CANVAS -->
+  <canvas id="film-canvas"></canvas>
+
+  <!-- OVERLAYS -->
+  <div id="vignette-overlay"></div>
+  <div id="grain-overlay"></div>
+  <div class="letterbox letterbox-top"></div>
+  <div class="letterbox letterbox-bottom"></div>
+  <div id="transition-flash"></div>
+
+  <!-- TEXT OVERLAY -->
+  <div id="text-overlay">
+
+    <div class="scene-text" data-scene="1">
+      <p class="cinematic-line serif-italic" data-delay="0">Some lessons arrive before <span class="glow-warm">language.</span></p>
+      <p class="cinematic-line serif-italic" data-delay="1">Some dreams arrive before <span class="glow-cyan">understanding.</span></p>
+    </div>
+
+    <div class="scene-text" data-scene="1b">
+      <div class="crt-block">
+        <span class="crt-prefix">C:\&gt; </span>
+        <span id="crt-typed"></span>
+        <span class="crt-cursor">_</span>
+      </div>
+    </div>
+
+    <div class="scene-text" data-scene="2">
+      <div class="discovery-words">
+        <span class="word-reveal" data-delay="0">Gaming</span>
+        <span class="word-reveal" data-delay="1">Curiosity</span>
+        <span class="word-reveal" data-delay="2">Building</span>
+        <span class="word-reveal" data-delay="3">Purpose</span>
+      </div>
+    </div>
+
+    <div class="scene-text" data-scene="3">
+      <div class="storm-block">
+        <p class="cinematic-line" data-delay="0">He said <span class="glow-warm">nothing.</span></p>
+        <p class="cinematic-line" data-delay="1">The rain kept <span class="glow-cyan">falling.</span></p>
+        <p class="cinematic-line" data-delay="2">The world kept <span class="glow-cyan">moving.</span></p>
+        <p class="cinematic-line highlight-warm" data-delay="3">But something <span class="glow-warm">changed</span> that night.</p>
+      </div>
+    </div>
+
+    <div class="scene-text" data-scene="4">
+      <div class="question-block">
+        <p class="cinematic-line highlight-cyan" data-delay="0">The future belongs to the <span class="glow-cyan">capable.</span></p>
+        <p class="cinematic-line" data-delay="1">But capable for <span class="glow-warm">what?</span></p>
+        <p class="cinematic-line" data-delay="2">To <span class="glow-cyan">win?</span></p>
+        <p class="cinematic-line highlight-warm" data-delay="3">Or to <span class="glow-warm">matter?</span></p>
+      </div>
+    </div>
+
+    <div class="scene-text" data-scene="5">
+      <div class="answer-block">
+        <p class="cinematic-line" data-delay="0">I cannot fix the <span class="glow-cyan">whole world.</span></p>
+        <p class="cinematic-line" data-delay="1">But I can <span class="glow-warm">improve</span> the world <span class="glow-warm">around me.</span></p>
+        <p class="cinematic-line" data-delay="2">And maybe that is <span class="glow-warm">enough.</span></p>
+      </div>
+    </div>
+
+    <div class="scene-text" data-scene="5b">
+      <h3 class="be-the-reason">Be the reason.</h3>
+    </div>
+
+    <div class="scene-text" data-scene="6">
+      <div class="blueprint-label">
+        <span class="wip-badge">WIP</span>
+        <p class="cinematic-line serif-italic" data-delay="1">Ideas becoming structures.</p>
+        <div class="blueprint-nodes">
+          <span class="bp-node" data-delay="2">Food Donor</span>
+          <span class="bp-line" data-delay="2"></span>
+          <span class="bp-node glow-warm" data-delay="3">NGO &amp; Volunteer</span>
+          <span class="bp-line" data-delay="3"></span>
+          <span class="bp-node" data-delay="4">Community Kitchen</span>
+          <span class="bp-line" data-delay="4"></span>
+          <span class="bp-node highlight-cyan" data-delay="5">Food4All Network</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-text" data-scene="7">
+      <div class="outro-block">
+        <p class="cinematic-line" data-delay="0">Not <span class="glow-cyan">defeated.</span></p>
+        <p class="cinematic-line" data-delay="1">Not <span class="glow-cyan">victorious.</span></p>
+        <p class="cinematic-line highlight-warm" data-delay="2">Still <span class="glow-warm">building.</span></p>
+        <p class="outro-principle serif-italic" data-delay="3">The show <span class="glow-warm">must go on.</span></p>
+        <p class="outro-brand" data-delay="4">SPARROW_07</p>
+        <p class="outro-wip" data-delay="5">Work in Progress</p>
+        <p class="press-r-restart" data-delay="6">Press 'R' to Restart Journey</p>
+      </div>
+    </div>
+
+    <div class="still-building" id="still-building">Still Building.</div>
+  </div>
+
+  <!-- HUD -->
+  <div id="scene-hud">
+    <span class="hud-label">SCENE</span>
+    <span class="hud-number" id="hud-number">01</span>
+    <span class="hud-name" id="hud-name">FIRST SPARK</span>
+    <div class="hud-bar-track"><div class="hud-bar-fill" id="hud-bar-fill"></div></div>
+  </div>
+
+  <!-- SCROLL HINT -->
+  <div id="scroll-hint">
+    <div class="mouse-icon"><div class="mouse-wheel"></div></div>
+    <p class="hint-text">Scroll to begin</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
